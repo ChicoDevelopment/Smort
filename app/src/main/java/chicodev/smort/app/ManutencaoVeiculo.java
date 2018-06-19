@@ -102,7 +102,7 @@ public class ManutencaoVeiculo extends AppCompatActivity {
                         System.out.println(response);
 
                         if(response.isSuccessful()){
-                            if (!response.body().isErro()) {
+                            if (response.body().isErro()) {
                                 Toast.makeText(getApplicationContext(), response.body().getMensagem(), Toast.LENGTH_LONG).show();
                                 txtPlaca.setVisibility(View.INVISIBLE);
                                 txtMarca.setVisibility(View.INVISIBLE);

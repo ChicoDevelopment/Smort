@@ -78,7 +78,7 @@ public class CadastroVeiculo extends AppCompatActivity {
                         System.out.println(response.message().toString());
                         System.out.println(response.body().toString());
                         if (response.isSuccessful()) {
-                            if (!response.body().isErro()) {
+                            if (response.body().isErro()) {
                                 Toast.makeText(getApplicationContext(), "Alterado com sucesso", Toast.LENGTH_LONG).show();
                             }
                         }

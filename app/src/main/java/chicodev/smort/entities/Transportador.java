@@ -2,6 +2,8 @@ package chicodev.smort.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 /**
  * Created by txring on 19/06/2018.
  */
@@ -15,6 +17,9 @@ public class Transportador extends Pessoa {
 
     @JsonProperty (value = "reputacao")
     private double reputacao;
+
+    @JsonProperty (value = "listaVeiculo")
+    private List<Veiculo> listaVeiculo;
 
     public int getIdTransportador() {
         return idTransportador;
@@ -40,12 +45,21 @@ public class Transportador extends Pessoa {
         this.reputacao = reputacao;
     }
 
+    public List<Veiculo> getListaVeiculo() {
+        return listaVeiculo;
+    }
+
+    public void setListaVeiculo(List<Veiculo> listaVeiculo) {
+        this.listaVeiculo = listaVeiculo;
+    }
+
     @Override
     public String toString() {
         return "Transportador{" +
                 "idTransportador=" + idTransportador +
                 ", cnh=" + cnh +
                 ", reputacao=" + reputacao +
+                ", listaVeiculo=" + listaVeiculo +
                 '}';
     }
 }

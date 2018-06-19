@@ -19,6 +19,12 @@ public class Demanda {
     @JsonProperty (value = "comentario")
     private String comentario;
 
+    @JsonProperty (value = "idUsuario")
+    private int idUsuario;
+
+    @JsonProperty (value = "idTransportador")
+    private int idTransportador;
+
     public int getIdDemanda() {
         return idDemanda;
     }
@@ -51,6 +57,22 @@ public class Demanda {
         this.comentario = comentario;
     }
 
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public int getIdTransportador() {
+        return idTransportador;
+    }
+
+    public void setIdTransportador(int idTransportador) {
+        this.idTransportador = idTransportador;
+    }
+
     @Override
     public String toString() {
         return "Demanda{" +
@@ -58,6 +80,8 @@ public class Demanda {
                 ", estado='" + estado + '\'' +
                 ", nota='" + nota + '\'' +
                 ", comentario='" + comentario + '\'' +
+                ", idUsuario=" + idUsuario +
+                ", idTransportador=" + idTransportador +
                 '}';
     }
 }
