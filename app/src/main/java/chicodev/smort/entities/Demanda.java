@@ -19,11 +19,11 @@ public class Demanda {
     @JsonProperty (value = "comentario")
     private String comentario;
 
-    @JsonProperty (value = "idUsuario")
-    private int idUsuario;
+    @JsonProperty (value = "usuario")
+    private Usuario usuario;
 
-    @JsonProperty (value = "idTransportador")
-    private int idTransportador;
+    @JsonProperty (value = "transportador")
+    private Transportador transportador;
 
     public int getIdDemanda() {
         return idDemanda;
@@ -57,20 +57,20 @@ public class Demanda {
         this.comentario = comentario;
     }
 
-    public int getIdUsuario() {
-        return idUsuario;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public int getIdTransportador() {
-        return idTransportador;
+    public Transportador getTransportador() {
+        return transportador;
     }
 
-    public void setIdTransportador(int idTransportador) {
-        this.idTransportador = idTransportador;
+    public void setTransportador(Transportador transportador) {
+        this.transportador = transportador;
     }
 
     @Override
@@ -80,8 +80,8 @@ public class Demanda {
                 ", estado='" + estado + '\'' +
                 ", nota='" + nota + '\'' +
                 ", comentario='" + comentario + '\'' +
-                ", idUsuario=" + idUsuario +
-                ", idTransportador=" + idTransportador +
+                ", usuario=" + usuario +
+                ", transportador=" + transportador +
                 '}';
     }
 }

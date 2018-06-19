@@ -13,8 +13,8 @@ public class FormaPagamento {
     @JsonProperty (value = "descricao")
     private String descricao;
 
-    @JsonProperty (value = "idTipo")
-    private int idTipo;
+    @JsonProperty (value = "tipo")
+    private TipoPagamento tipo;
 
     public int getIdForma() {
         return idForma;
@@ -32,12 +32,12 @@ public class FormaPagamento {
         this.descricao = descricao;
     }
 
-    public int getIdTipo() {
-        return idTipo;
+    public TipoPagamento getTipo() {
+        return tipo;
     }
 
-    public void setIdTipo(int idTipo) {
-        this.idTipo = idTipo;
+    public void setTipo(TipoPagamento tipo) {
+        this.tipo = tipo;
     }
 
     @Override
@@ -45,7 +45,7 @@ public class FormaPagamento {
         return "FormaPagamento{" +
                 "idForma=" + idForma +
                 ", descricao='" + descricao + '\'' +
-                ", idTipo=" + idTipo +
+                ", tipo=" + tipo +
                 '}';
     }
 }

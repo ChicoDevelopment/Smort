@@ -30,7 +30,7 @@ public class Veiculo implements Serializable{
     private String placa;
 
     @JsonProperty (value = "idTipo")
-    private int idTipo;
+    private TipoVeiculo tipo;
 
     public int getIdVeiculo() {
         return idVeiculo;
@@ -80,12 +80,12 @@ public class Veiculo implements Serializable{
         this.listaVeiculo = listaVeiculo;
     }
 
-    public int getIdTipo() {
-        return idTipo;
+    public TipoVeiculo getTipo() {
+        return tipo;
     }
 
-    public void setIdTipo(int idTipo) {
-        this.idTipo = idTipo;
+    public void setTipo(TipoVeiculo tipo) {
+        this.tipo = tipo;
     }
 
     @Override
@@ -97,7 +97,7 @@ public class Veiculo implements Serializable{
                 ", modelo='" + modelo + '\'' +
                 ", cor='" + cor + '\'' +
                 ", placa='" + placa + '\'' +
-                ", idTipo=" + idTipo +
+                ", tipo=" + tipo +
                 '}';
     }
 }

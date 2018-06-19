@@ -18,6 +18,9 @@ public class Transportador extends Pessoa {
     @JsonProperty (value = "reputacao")
     private double reputacao;
 
+    @JsonProperty (value = "pessoa")
+    private Pessoa pessoa;
+
     @JsonProperty (value = "listaVeiculo")
     private List<Veiculo> listaVeiculo;
 
@@ -53,12 +56,21 @@ public class Transportador extends Pessoa {
         this.listaVeiculo = listaVeiculo;
     }
 
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
+
     @Override
     public String toString() {
         return "Transportador{" +
                 "idTransportador=" + idTransportador +
                 ", cnh=" + cnh +
                 ", reputacao=" + reputacao +
+                ", pessoa=" + pessoa +
                 ", listaVeiculo=" + listaVeiculo +
                 '}';
     }
