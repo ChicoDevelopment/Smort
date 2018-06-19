@@ -14,7 +14,7 @@ public class Erro {
     private String mensagem;
 
     public boolean isErro() {
-        return !erro;
+        return erro;
     }
 
     public void setErro(boolean erro) {
