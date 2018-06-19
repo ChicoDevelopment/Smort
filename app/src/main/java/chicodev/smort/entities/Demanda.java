@@ -2,6 +2,8 @@ package chicodev.smort.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 /**
  * Created by txring on 19/06/2018.
  */
@@ -24,6 +26,8 @@ public class Demanda {
 
     @JsonProperty (value = "transportador")
     private Transportador transportador;
+
+    private List<Objeto> listaObjeto;
 
     public int getIdDemanda() {
         return idDemanda;
@@ -73,6 +77,14 @@ public class Demanda {
         this.transportador = transportador;
     }
 
+    public List<Objeto> getListaObjeto() {
+        return listaObjeto;
+    }
+
+    public void setListaObjeto(List<Objeto> listaObjeto) {
+        this.listaObjeto = listaObjeto;
+    }
+
     @Override
     public String toString() {
         return "Demanda{" +
@@ -82,6 +94,7 @@ public class Demanda {
                 ", comentario='" + comentario + '\'' +
                 ", usuario=" + usuario +
                 ", transportador=" + transportador +
+                ", listaObjeto=" + listaObjeto +
                 '}';
     }
 }

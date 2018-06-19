@@ -21,7 +21,6 @@ public class Transportador extends Pessoa {
     @JsonProperty (value = "pessoa")
     private Pessoa pessoa;
 
-    @JsonProperty (value = "listaVeiculo")
     private List<Veiculo> listaVeiculo;
 
     public int getIdTransportador() {

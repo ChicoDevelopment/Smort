@@ -17,8 +17,8 @@ public class Veiculo implements Serializable{
     @JsonProperty(value = "idveiculo")
     private int idVeiculo;
 
-    @JsonProperty(value = "marca")
-    private String marca;
+    @JsonProperty (value = "marca")
+    private Marca marca;
 
     @JsonProperty(value = "modelo")
     private String modelo;
@@ -38,14 +38,6 @@ public class Veiculo implements Serializable{
 
     public void setIdVeiculo(int idVeiculo) {
         this.idVeiculo = idVeiculo;
-    }
-
-    public String getMarca() {
-        return marca;
-    }
-
-    public void setMarca(String marca) {
-        this.marca = marca;
     }
 
     public String getModelo() {
@@ -88,12 +80,20 @@ public class Veiculo implements Serializable{
         this.tipo = tipo;
     }
 
+    public Marca getMarca() {
+        return marca;
+    }
+
+    public void setMarca(Marca marca) {
+        this.marca = marca;
+    }
+
     @Override
     public String toString() {
         return "Veiculo{" +
                 "listaVeiculo=" + listaVeiculo +
                 ", idVeiculo=" + idVeiculo +
-                ", marca='" + marca + '\'' +
+                ", marca=" + marca +
                 ", modelo='" + modelo + '\'' +
                 ", cor='" + cor + '\'' +
                 ", placa='" + placa + '\'' +
