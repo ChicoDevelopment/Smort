@@ -13,6 +13,9 @@ public class FormaPagamento {
     @JsonProperty (value = "descricao")
     private String descricao;
 
+    @JsonProperty (value = "idTipo")
+    private int idTipo;
+
     public int getIdForma() {
         return idForma;
     }
@@ -29,11 +32,20 @@ public class FormaPagamento {
         this.descricao = descricao;
     }
 
+    public int getIdTipo() {
+        return idTipo;
+    }
+
+    public void setIdTipo(int idTipo) {
+        this.idTipo = idTipo;
+    }
+
     @Override
     public String toString() {
         return "FormaPagamento{" +
                 "idForma=" + idForma +
                 ", descricao='" + descricao + '\'' +
+                ", idTipo=" + idTipo +
                 '}';
     }
 }
