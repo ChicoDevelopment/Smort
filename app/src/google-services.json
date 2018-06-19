@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1075099791101",
+    "firebase_url": "https://smort-cf17a.firebaseio.com",
+    "project_id": "smort-cf17a",
+    "storage_bucket": "smort-cf17a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1075099791101:android:bc69bf165c81df47",
+        "android_client_info": {
+          "package_name": "chicodev.smort"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1075099791101-4fv3dc6eb7gsvr97mkv6h19l83r7rbtm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHU6RnrdlW6uPJIaOzdUob27Q84Xb5e88"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
