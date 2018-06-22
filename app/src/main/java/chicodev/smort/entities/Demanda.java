@@ -24,8 +24,8 @@ public class Demanda {
     @JsonProperty (value = "usuario")
     private Usuario usuario;
 
-    @JsonProperty (value = "transportador")
-    private Transportador transportador;
+    @JsonProperty (value = "veiculo")
+    private Veiculo veiculo;
 
     private List<Objeto> listaObjeto;
 
@@ -69,12 +69,12 @@ public class Demanda {
         this.usuario = usuario;
     }
 
-    public Transportador getTransportador() {
-        return transportador;
+    public Veiculo getVeiculo() {
+        return veiculo;
     }
 
-    public void setTransportador(Transportador transportador) {
-        this.transportador = transportador;
+    public void setVeiculo(Veiculo veiculo) {
+        this.veiculo = veiculo;
     }
 
     public List<Objeto> getListaObjeto() {
@@ -93,7 +93,7 @@ public class Demanda {
                 ", nota='" + nota + '\'' +
                 ", comentario='" + comentario + '\'' +
                 ", usuario=" + usuario +
-                ", transportador=" + transportador +
+                ", veiculo=" + veiculo +
                 ", listaObjeto=" + listaObjeto +
                 '}';
     }

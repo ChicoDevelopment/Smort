@@ -1,6 +1,6 @@
 package chicodev.smort.core;
 
-import chicodev.smort.data.PessoaService;
+import chicodev.smort.data.UsuarioService;
 import chicodev.smort.data.VeiculoService;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
@@ -23,8 +23,8 @@ public class RetrofitConfig {
         return this.retrofit.create(VeiculoService.class);
     }
 
-    public PessoaService getPesoaService(){
-        return this.retrofit.create(PessoaService.class);
+    public UsuarioService getPesoaService(){
+        return this.retrofit.create(UsuarioService.class);
     }
 
 }

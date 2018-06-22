@@ -7,9 +7,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class Pessoa {
 
-    @JsonProperty (value = "idPessoa")
-    private int idPessoa;
-
     @JsonProperty (value = "email")
     private String email;
 
@@ -21,14 +18,6 @@ public class Pessoa {
 
     @JsonProperty (value = "cpf")
     private int cpf;
-
-    public int getIdPessoa() {
-        return idPessoa;
-    }
-
-    public void setIdPessoa(int idPessoa) {
-        this.idPessoa = idPessoa;
-    }
 
     public String getEmail() {
         return email;
@@ -65,7 +54,6 @@ public class Pessoa {
     @Override
     public String toString() {
         return "Pessoa{" +
-                "idPessoa=" + idPessoa +
                 ", email='" + email + '\'' +
                 ", senha='" + senha + '\'' +
                 ", nome='" + nome + '\'' +

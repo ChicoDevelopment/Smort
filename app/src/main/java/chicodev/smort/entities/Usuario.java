@@ -20,9 +20,6 @@ public class Usuario extends Pessoa {
     @JsonProperty (value = "foto")
     private byte[] foto;
 
-    @JsonProperty (value = "pessoa")
-    private Pessoa pessoa;
-
     @JsonProperty (value = "listaForma")
     private List<FormaPagamento> listaForma;
 
@@ -58,21 +55,12 @@ public class Usuario extends Pessoa {
         this.listaForma = listaForma;
     }
 
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
-
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
-    }
-
     @Override
     public String toString() {
         return "Usuario{" +
                 "idUsuario=" + idUsuario +
                 ", reputacao=" + reputacao +
                 ", foto=" + Arrays.toString(foto) +
-                ", pessoa=" + pessoa +
                 ", listaForma=" + listaForma +
                 '}';
     }
