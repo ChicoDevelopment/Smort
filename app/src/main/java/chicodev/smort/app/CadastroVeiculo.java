@@ -1,5 +1,6 @@
 package chicodev.smort.app;
 
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -42,14 +43,26 @@ public class CadastroVeiculo extends AppCompatActivity {
         final EditText txtCor = findViewById(R.id.txtCor);
         final Button btnSalvar = findViewById(R.id.btnSalvar);
 
+        Call
         if (veiculo == null){
             veiculo = new Veiculo();
         }else{
             txtPlaca.setText(veiculo.getPlaca());
-            txtMarca.setText(veiculo.getMarca());
+            txtMarca.setText(veiculo.getMarca().getDescricao());
             txtModelo.setText(veiculo.getModelo());
             txtCor.setText(veiculo.getCor());
         }
+
+        txtMarca.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AlertDialog.Builder select = new AlertDialog.Builder(getApplicationContext());
+                select.setTitle("Selecione uma marca");
+                select.
+
+            }
+        });
 
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
