@@ -1,4 +1,4 @@
-package chicodev.smort.app;
+package chicodev.smort.view;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -10,13 +10,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.List;
-
 import chicodev.smort.R;
 import chicodev.smort.core.Gerenciador;
 import chicodev.smort.core.RetrofitConfig;
-import chicodev.smort.entities.Erro;
-import chicodev.smort.entities.Veiculo;
+import chicodev.smort.model.Erro;
+import chicodev.smort.model.Transportador;
+import chicodev.smort.model.Veiculo;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -24,6 +23,7 @@ import retrofit2.Response;
 public class ManutencaoVeiculo extends AppCompatActivity {
 
     Veiculo veiculo;
+    Transportador transportador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,44 +50,41 @@ public class ManutencaoVeiculo extends AppCompatActivity {
         btnBusca.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Call<List<Veiculo>> callBusca = new RetrofitConfig().getVeiculoService().pesquisaveiculo(placa.getText().toString());
-                callBusca.enqueue(new Callback<List<Veiculo>>() {
-
+                transportador.setIdTransportador(Integer.parseInt(placa.getText().toString()));
+                veiculo.setTransportador(transportador);
+                Call<Veiculo> callBusca = new RetrofitConfig().getVeiculoService().pesquisaveiculo(veiculo);
+                callBusca.enqueue(new Callback<Veiculo>() {
                     @Override
-                    public void onResponse(Call<List<Veiculo>> call, Response<List<Veiculo>> response) {
+                    public void onResponse(Call<Veiculo> call, Response<Veiculo> response) {
 
-                        System.out.println(response.toString());
                         if (response.isSuccessful()) {
-                            if (response.body().size() > 0) {
-                                List<Veiculo> listaVeiculo = response.body();
-                                veiculo = listaVeiculo.get(0);
-                                System.out.println(veiculo.getIdVeiculo());
-                                txtPlaca.setText(veiculo.getPlaca());
-                                txtMarca.setText(veiculo.getMarca());
-                                txtModelo.setText(veiculo.getModelo());
-                                txtCor.setText(veiculo.getCor());
+                            veiculo = response.body();
+                            System.out.println(veiculo.getIdVeiculo());
+                            txtPlaca.setText(veiculo.getPlaca());
+                            txtMarca.setText(veiculo.getMarca().getDescricao());
+                            txtModelo.setText(veiculo.getModelo());
+                            txtCor.setText(veiculo.getCor());
 
-                                btnAlterar.setVisibility(View.VISIBLE);
-                                btnExcluir.setVisibility(View.VISIBLE);
-                            } else {
-                                Toast.makeText(getApplicationContext(), "Placa inválida!", Toast.LENGTH_SHORT).show();
-                                txtPlaca.setVisibility(View.INVISIBLE);
-                                txtMarca.setVisibility(View.INVISIBLE);
-                                txtModelo.setVisibility(View.INVISIBLE);
-                                txtCor.setVisibility(View.INVISIBLE);
-                                btnAlterar.setVisibility(View.INVISIBLE);
-                                btnExcluir.setVisibility(View.INVISIBLE);
-                            }
+                            btnAlterar.setVisibility(View.VISIBLE);
+                            btnExcluir.setVisibility(View.VISIBLE);
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Placa inválida!", Toast.LENGTH_SHORT).show();
+                            txtPlaca.setVisibility(View.INVISIBLE);
+                            txtMarca.setVisibility(View.INVISIBLE);
+                            txtModelo.setVisibility(View.INVISIBLE);
+                            txtCor.setVisibility(View.INVISIBLE);
+                            btnAlterar.setVisibility(View.INVISIBLE);
+                            btnExcluir.setVisibility(View.INVISIBLE);
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<List<Veiculo>> call, Throwable t) {
+                    public void onFailure(Call<Veiculo> call, Throwable t) {
                         Log.e("CEPService   ", "Erro ao buscar a lista de veículos: " + t.getMessage());
                         t.printStackTrace();
                         System.out.append(t.toString());
-                    }
 
+                    }
                 });
             }
         });
@@ -95,13 +92,13 @@ public class ManutencaoVeiculo extends AppCompatActivity {
         btnExcluir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Call<Erro> callExcluir = new RetrofitConfig().getVeiculoService().excluiveiculo(veiculo.getPlaca());
+                Call<Erro> callExcluir = new RetrofitConfig().getVeiculoService().excluiveiculo(veiculo);
                 callExcluir.enqueue(new Callback<Erro>() {
                     @Override
                     public void onResponse(Call<Erro> call, Response<Erro> response) {
                         System.out.println(response);
 
-                        if(response.isSuccessful()){
+                        if (response.isSuccessful()) {
                             if (response.body().isErro()) {
                                 Toast.makeText(getApplicationContext(), response.body().getMensagem(), Toast.LENGTH_LONG).show();
                                 txtPlaca.setVisibility(View.INVISIBLE);
@@ -144,4 +141,9 @@ public class ManutencaoVeiculo extends AppCompatActivity {
             }
         });
     }
+
+    private void setVeiculo(){
+
+    }
 }
+

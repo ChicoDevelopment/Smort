@@ -1,4 +1,4 @@
-package chicodev.smort.entities;
+package chicodev.smort.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

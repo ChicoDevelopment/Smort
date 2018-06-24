@@ -4,17 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".app.CadastroVeiculo">
+    tools:context=".view.CadastroVeiculo"
+    tools:layout_editor_absoluteY="81dp">
 
-    <EditText
+    <AutoCompleteTextView
+        android:id="@+id/txtTipoVeiculo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:dropDownHeight="wrap_content"
+        android:ems="10"
+        android:hint="Insira o tipo"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/txtMarca"
+        app:layout_constraintTop_toBottomOf="@+id/txtMarca" />
+
+    <AutoCompleteTextView
         android:id="@+id/txtMarca"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
+        android:layout_marginTop="22dp"
+        android:dropDownHeight="wrap_content"
         android:ems="10"
         android:hint="Insira a marca"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/txtModelo"
         app:layout_constraintStart_toStartOf="@+id/txtPlaca"
         app:layout_constraintTop_toBottomOf="@+id/txtPlaca" />
 
@@ -22,24 +35,22 @@
         android:id="@+id/txtPlaca"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="27dp"
-        android:layout_marginEnd="27dp"
+        android:layout_marginTop="50dp"
         android:ems="10"
         android:hint="Insira a placa"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/txtMarca"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/txtCor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="44dp"
+        android:layout_marginTop="25dp"
         android:ems="10"
         android:hint="Insira a cor"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/btnSalvar"
         app:layout_constraintStart_toStartOf="@+id/txtModelo"
         app:layout_constraintTop_toBottomOf="@+id/txtModelo" />
 
@@ -47,34 +58,19 @@
         android:id="@+id/txtModelo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="21dp"
+        android:layout_marginTop="32dp"
         android:ems="10"
         android:hint="Insira o modelo"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/txtCor"
-        app:layout_constraintStart_toStartOf="@+id/txtMarca"
-        app:layout_constraintTop_toBottomOf="@+id/txtMarca" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginBottom="30dp"
-        android:layout_marginTop="45dp"
-        android:text="Cadastro de Veículo"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/txtPlaca"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/txtTipoVeiculo"
+        app:layout_constraintTop_toBottomOf="@+id/txtTipoVeiculo" />
 
     <Button
         android:id="@+id/btnSalvar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="54dp"
+        android:layout_marginTop="28dp"
         android:text="Salvar"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtCor" />

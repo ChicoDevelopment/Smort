@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:padding="50dp"
     android:layout_width="match_parent"
-    tools:context=".app.ManutencaoVeiculo">
+    tools:context=".view.ManutencaoVeiculo">
 
     <EditText
         android:id="@+id/etPlaca"

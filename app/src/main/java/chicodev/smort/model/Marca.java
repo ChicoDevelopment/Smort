@@ -1,4 +1,4 @@
-package chicodev.smort.entities;
+package chicodev.smort.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class Marca {
 
-    @JsonProperty (value = "idMarca")
+    @JsonProperty (value = "idmarca")
     private int idMarca;
 
     @JsonProperty (value = "descricao")
@@ -31,9 +31,6 @@ public class Marca {
 
     @Override
     public String toString() {
-        return "Marca{" +
-                "idMarca=" + idMarca +
-                ", descricao='" + descricao + '\'' +
-                '}';
+        return descricao;
     }
 }

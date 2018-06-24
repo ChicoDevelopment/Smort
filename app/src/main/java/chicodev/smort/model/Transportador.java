@@ -1,4 +1,4 @@
-package chicodev.smort.entities;
+package chicodev.smort.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Transportador extends Pessoa {
 
-    @JsonProperty (value = "idTransportador")
+    @JsonProperty (value = "idtransportador")
     private int idTransportador;
 
     @JsonProperty (value = "cnh")
