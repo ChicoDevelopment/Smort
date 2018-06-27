@@ -2,10 +2,12 @@ package chicodev.smort.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
+
 /**
  * Created by txring on 01/05/2018.
  */
-public class Erro {
+public class Erro implements Serializable{
 
     @JsonProperty(value = "erro")
     private boolean erro;

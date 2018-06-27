@@ -2,15 +2,18 @@ package chicodev.smort.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
+import java.util.Objects;
+
 /**
  * Created by txring on 19/06/2018.
  */
-public class TipoVeiculo {
+public class TipoVeiculo implements Serializable {
 
-    @JsonProperty (value = "idtipo")
+    @JsonProperty(value = "idtipo")
     private int idTipo;
 
-    @JsonProperty (value = "descricao")
+    @JsonProperty(value = "descricaotipo")
     private String descricao;
 
     public int getIdTipo() {
@@ -32,5 +35,23 @@ public class TipoVeiculo {
     @Override
     public String toString() {
         return descricao;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idTipo, descricao);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if (obj == this) return true;
+
+        if (!(obj instanceof TipoVeiculo)) return false;
+
+        TipoVeiculo tipoVeiculo = (TipoVeiculo) obj;
+
+        return idTipo == tipoVeiculo.idTipo &&
+                Objects.equals(descricao, tipoVeiculo.descricao);
     }
 }

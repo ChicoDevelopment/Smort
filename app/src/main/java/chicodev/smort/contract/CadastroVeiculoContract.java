@@ -13,6 +13,8 @@ public interface CadastroVeiculoContract {
 
     void cadastrarVeiculo(Erro erro);
 
+    void alterarVeiculo(Erro erro);
+
     void getListaMarca (List<Marca> listaMarca);
 
     void getListaTipo (List<TipoVeiculo> listaTipo);

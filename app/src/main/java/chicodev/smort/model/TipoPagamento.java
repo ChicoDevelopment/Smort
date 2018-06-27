@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class TipoPagamento {
 
 
-    @JsonProperty (value = "idTipo")
+    @JsonProperty (value = "idtipo")
     private int idTipo;
 
     @JsonProperty (value = "descricao")

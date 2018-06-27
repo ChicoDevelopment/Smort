@@ -10,140 +10,141 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import chicodev.smort.R;
+import chicodev.smort.contract.ManutencaoVeiculoContract;
 import chicodev.smort.core.Gerenciador;
 import chicodev.smort.core.RetrofitConfig;
 import chicodev.smort.model.Erro;
 import chicodev.smort.model.Transportador;
 import chicodev.smort.model.Veiculo;
+import chicodev.smort.presenter.ManutencaoVeiculoPresenter;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ManutencaoVeiculo extends AppCompatActivity {
+public class ManutencaoVeiculo extends AppCompatActivity implements ManutencaoVeiculoContract {
 
-    Veiculo veiculo;
-    Transportador transportador;
+    private ManutencaoVeiculoPresenter presenter;
+    private TextView txtPlaca;
+    private TextView txtMarca;
+    private TextView txtModelo;
+    private TextView txtCor;
+    private EditText placa;
+    private Button btnBusca;
+    private Button btnAlterar;
+    private Button btnExcluir;
+    private Button btnNovo;
+    private Veiculo veiculo;
+    private Erro erro;
+    private Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manutencao_veiculo);
-        Gerenciador.setInstance(this);
     }
 
     @Override
     protected void onResume() {
-
         super.onResume();
-
-        final TextView txtPlaca = findViewById(R.id.txtPlaca);
-        final TextView txtMarca = findViewById(R.id.txtMarca);
-        final TextView txtModelo = findViewById(R.id.txtModelo);
-        final TextView txtCor = findViewById(R.id.txtCor);
-        final EditText placa = findViewById(R.id.etPlaca);
-        final Button btnBusca = findViewById(R.id.btnPesquisar);
-        final Button btnAlterar = findViewById(R.id.btnAlterar);
-        final Button btnExcluir = findViewById(R.id.btnExcluir);
-        final Button btnNovo = findViewById(R.id.btnNovo);
+        inicializaComponentes();
 
         btnBusca.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                transportador.setIdTransportador(Integer.parseInt(placa.getText().toString()));
-                veiculo.setTransportador(transportador);
-                Call<Veiculo> callBusca = new RetrofitConfig().getVeiculoService().pesquisaveiculo(veiculo);
-                callBusca.enqueue(new Callback<Veiculo>() {
-                    @Override
-                    public void onResponse(Call<Veiculo> call, Response<Veiculo> response) {
+                veiculo = new Veiculo();
+                veiculo.setPlaca(placa.getText().toString());
 
-                        if (response.isSuccessful()) {
-                            veiculo = response.body();
-                            System.out.println(veiculo.getIdVeiculo());
-                            txtPlaca.setText(veiculo.getPlaca());
-                            txtMarca.setText(veiculo.getMarca().getDescricao());
-                            txtModelo.setText(veiculo.getModelo());
-                            txtCor.setText(veiculo.getCor());
-
-                            btnAlterar.setVisibility(View.VISIBLE);
-                            btnExcluir.setVisibility(View.VISIBLE);
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Placa inválida!", Toast.LENGTH_SHORT).show();
-                            txtPlaca.setVisibility(View.INVISIBLE);
-                            txtMarca.setVisibility(View.INVISIBLE);
-                            txtModelo.setVisibility(View.INVISIBLE);
-                            txtCor.setVisibility(View.INVISIBLE);
-                            btnAlterar.setVisibility(View.INVISIBLE);
-                            btnExcluir.setVisibility(View.INVISIBLE);
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<Veiculo> call, Throwable t) {
-                        Log.e("CEPService   ", "Erro ao buscar a lista de veículos: " + t.getMessage());
-                        t.printStackTrace();
-                        System.out.append(t.toString());
-
-                    }
-                });
+                presenter.getVeiculo(veiculo);
             }
         });
 
         btnExcluir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Call<Erro> callExcluir = new RetrofitConfig().getVeiculoService().excluiveiculo(veiculo);
-                callExcluir.enqueue(new Callback<Erro>() {
-                    @Override
-                    public void onResponse(Call<Erro> call, Response<Erro> response) {
-                        System.out.println(response);
-
-                        if (response.isSuccessful()) {
-                            if (response.body().isErro()) {
-                                Toast.makeText(getApplicationContext(), response.body().getMensagem(), Toast.LENGTH_LONG).show();
-                                txtPlaca.setVisibility(View.INVISIBLE);
-                                txtMarca.setVisibility(View.INVISIBLE);
-                                txtModelo.setVisibility(View.INVISIBLE);
-                                txtCor.setVisibility(View.INVISIBLE);
-                                btnAlterar.setVisibility(View.INVISIBLE);
-                                btnExcluir.setVisibility(View.INVISIBLE);
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<Erro> call, Throwable t) {
-                        t.printStackTrace();
-                    }
-                });
+                presenter.excluirVeiculo(veiculo);
             }
         });
 
         btnAlterar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Bundle bundle = new Bundle();
+                bundle.putBoolean("novo", false);
                 bundle.putSerializable("veiculo", veiculo);
                 Intent it = new Intent(ManutencaoVeiculo.this, CadastroVeiculo.class);
                 it.putExtras(bundle);
                 startActivity(it);
                 finish();
+
             }
         });
 
         btnNovo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                bundle.putBoolean("novo", true);
                 Intent it = new Intent(ManutencaoVeiculo.this, CadastroVeiculo.class);
+                it.putExtras(bundle);
                 startActivity(it);
                 finish();
             }
         });
     }
 
-    private void setVeiculo(){
+    private void inicializaComponentes() {
+        presenter = new ManutencaoVeiculoPresenter(this);
+        txtPlaca = findViewById(R.id.txtPlaca);
+        txtMarca = findViewById(R.id.txtMarca);
+        txtModelo = findViewById(R.id.txtModelo);
+        txtCor = findViewById(R.id.txtCor);
+        placa = findViewById(R.id.etPlaca);
+        btnBusca = findViewById(R.id.btnPesquisar);
+        btnAlterar = findViewById(R.id.btnAlterar);
+        btnExcluir = findViewById(R.id.btnExcluir);
+        btnNovo = findViewById(R.id.btnNovo);
+        veiculo = new Veiculo();
+        erro = new Erro();
+        bundle = new Bundle();
+    }
 
+    private void setCampos(boolean erro) {
+        if (erro) {
+            txtPlaca.setText(veiculo.getPlaca());
+            txtMarca.setText(veiculo.getMarca().getDescricao());
+            txtModelo.setText(veiculo.getModelo());
+            txtCor.setText(veiculo.getCor());
+
+            btnAlterar.setVisibility(View.VISIBLE);
+            btnExcluir.setVisibility(View.VISIBLE);
+        }else{
+            Toast.makeText(getApplicationContext(), "Placa inválida!", Toast.LENGTH_SHORT).show();
+            txtPlaca.setVisibility(View.INVISIBLE);
+            txtMarca.setVisibility(View.INVISIBLE);
+            txtModelo.setVisibility(View.INVISIBLE);
+            txtCor.setVisibility(View.INVISIBLE);
+
+            btnAlterar.setVisibility(View.INVISIBLE);
+            btnExcluir.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    @Override
+    public void excluirVeiculo(Erro erro) {
+        this.erro = erro;
+        Toast.makeText(this, erro.getMensagem(), Toast.LENGTH_LONG).show();
+        //setCampos(erro.isErro());
+    }
+
+    @Override
+    public void veiculoPreparado(Veiculo v) {
+        veiculo = v;
+        setCampos(true);
+    }
+
+    @Override
+    public void veiculoErrado() {
+        setCampos(false);
     }
 }
-

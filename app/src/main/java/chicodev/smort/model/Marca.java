@@ -2,15 +2,17 @@ package chicodev.smort.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
+
 /**
  * Created by txring on 19/06/2018.
  */
-public class Marca {
+public class Marca implements Serializable{
 
     @JsonProperty (value = "idmarca")
     private int idMarca;
 
-    @JsonProperty (value = "descricao")
+    @JsonProperty (value = "descricaomarca")
     private String descricao;
 
     public int getIdMarca() {

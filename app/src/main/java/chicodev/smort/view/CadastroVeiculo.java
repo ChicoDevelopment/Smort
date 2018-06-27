@@ -24,7 +24,6 @@ import chicodev.smort.presenter.CadastroVeiculoPresenter;
 public class CadastroVeiculo extends AppCompatActivity implements CadastroVeiculoContract {
 
     private CadastroVeiculoPresenter presenter;
-
     private List<Marca> listaMarca;
     private List<TipoVeiculo> listaTipo;
     private EditText txtPlaca;
@@ -37,50 +36,45 @@ public class CadastroVeiculo extends AppCompatActivity implements CadastroVeicul
     private ArrayAdapter<TipoVeiculo> tipoArrayAdapter;
     private Veiculo veiculo;
     private Erro erro;
+    private boolean novo;
+    private Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cadastro_veiculo);
+        this.bundle = getIntent().getExtras();
+        inicializaComponentes();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        setVeiculo();
+        inicializaComponentes();
+        preencheCampos();
 
-        presenter = new CadastroVeiculoPresenter(this);
-        presenter.getListaMarca();
-        presenter.getListaTipo();
-
-        txtPlaca = findViewById(R.id.txtPlaca);
-        txtMarca = findViewById(R.id.txtMarca);
-        txtTipo = findViewById(R.id.txtTipoVeiculo);
-        txtModelo = findViewById(R.id.txtModelo);
-        txtCor = findViewById(R.id.txtCor);
-        salvar = findViewById(R.id.btnSalvar);
-
-        veiculo = new Veiculo();
-
-        txtMarca.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        /*txtMarca.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 veiculo.setMarca(listaMarca.get(position));
             }
         });
+        */
 
         txtTipo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                System.out.println(listaTipo.get(position));
-                veiculo.setTipo(listaTipo.get(position));
+                System.out.println(tipoArrayAdapter.getItem(position));
+                veiculo.setTipo(tipoArrayAdapter.getItem(position));
             }
         });
 
         txtMarca.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                System.out.println(listaMarca.get(position));
-                veiculo.setMarca(listaMarca.get(position));
+                System.out.println(marcaArrayAdapter.getItem(position));
+                veiculo.setMarca(marcaArrayAdapter.getItem(position));
             }
         });
 
@@ -96,15 +90,63 @@ public class CadastroVeiculo extends AppCompatActivity implements CadastroVeicul
                 t.setIdTransportador(1);
                 veiculo.setTransportador(t);
 
-                presenter.cadastrarVeiculo(veiculo);
-
+                if (novo) {
+                    presenter.cadastrarVeiculo(veiculo);
+                } else {
+                    presenter.alterarVeiculo(veiculo);
+                }
             }
         });
     }
 
+    private void inicializaComponentes() {
+        presenter = new CadastroVeiculoPresenter(this);
+
+        txtPlaca = findViewById(R.id.txtPlaca);
+        txtMarca = findViewById(R.id.txtMarca);
+        txtTipo = findViewById(R.id.txtTipoVeiculo);
+        txtModelo = findViewById(R.id.txtModelo);
+        txtCor = findViewById(R.id.txtCor);
+        salvar = findViewById(R.id.btnSalvar);
+
+        presenter.getListaMarca();
+        presenter.getListaTipo();
+
+    }
+
+    private void setVeiculo() {
+        if (bundle.getBoolean("novo")) {
+            novo = true;
+            veiculo = new Veiculo();
+        } else {
+            novo = false;
+            veiculo = (Veiculo) bundle.get("veiculo");
+        }
+    }
+
+    private void preencheCampos() {
+        if (!novo) {
+            txtPlaca.setText(veiculo.getPlaca());
+            txtModelo.setText(veiculo.getModelo());
+            txtCor.setText(veiculo.getCor());
+
+            /*txtMarca.setListSelection(marcaArrayAdapter.getPosition(veiculo.getMarca()));
+            txtTipo.setListSelection(tipoArrayAdapter.getPosition(veiculo.getTipo()));
+            */
+        }
+    }
 
     @Override
     public void cadastrarVeiculo(Erro erro) {
+
+        this.erro = erro;
+        System.out.println(erro.getMensagem());
+        Toast.makeText(this, erro.getMensagem(), Toast.LENGTH_LONG).show();
+
+    }
+
+    @Override
+    public void alterarVeiculo(Erro erro) {
 
         this.erro = erro;
         System.out.println(erro.getMensagem());
@@ -119,6 +161,9 @@ public class CadastroVeiculo extends AppCompatActivity implements CadastroVeicul
         marcaArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listaMarca);
         txtMarca.setAdapter(marcaArrayAdapter);
 
+        if (veiculo != null) {
+            txtMarca.setListSelection(marcaArrayAdapter.getPosition(veiculo.getMarca()));
+        }
     }
 
     @Override
@@ -128,5 +173,14 @@ public class CadastroVeiculo extends AppCompatActivity implements CadastroVeicul
         tipoArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listaTipo);
         txtTipo.setAdapter(tipoArrayAdapter);
 
+        if (!novo) {
+            for (int i = 0; i < tipos.size(); i++) {
+                if (tipoArrayAdapter.getItem(i).equals(veiculo.getTipo())) {
+                    txtTipo.setListSelection(i);
+                    System.out.println(txtTipo.getListSelection());
+                    System.out.println("something");
+                }
+            }
+        }
     }
 }
