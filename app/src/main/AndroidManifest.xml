@@ -18,7 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.CadastroVeiculo"></activity>
+        <activity android:name=".view.CadastroVeiculo" />
+        <activity android:name=".view.CadastroDemanda" />
+        <activity android:name=".view.ManutencaoDemanda"></activity>
     </application>
 
 </manifest>

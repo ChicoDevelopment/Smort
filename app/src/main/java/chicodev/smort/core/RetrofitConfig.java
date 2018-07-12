@@ -18,7 +18,7 @@ public class RetrofitConfig {
 
     public RetrofitConfig() {
         this.retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.0.107/SmortAPI/public/")
+                .baseUrl("http://192.168.43.199/SmortAPI/public/")
                 .addConverterFactory(JacksonConverterFactory.create())
                 .build();
     }
