@@ -1,4 +1,4 @@
-package chicodev.smort.service;
+package chicodev.smort.core.service;
 
 import chicodev.smort.model.Erro;
 import chicodev.smort.model.Pessoa;
@@ -8,9 +8,6 @@ import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 
-/**
- * Created by txring on 03/05/2018.
- */
 public interface UsuarioService {
 
     @POST("usuario/cadastrar")

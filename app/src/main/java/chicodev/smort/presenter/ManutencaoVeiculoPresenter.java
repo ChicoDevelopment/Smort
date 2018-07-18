@@ -1,9 +1,9 @@
 package chicodev.smort.presenter;
 
-import chicodev.smort.core.RetrofitConfig;
+import chicodev.smort.core.Services;
 import chicodev.smort.model.Erro;
 import chicodev.smort.model.Veiculo;
-import chicodev.smort.service.VeiculoService;
+import chicodev.smort.core.service.VeiculoService;
 import chicodev.smort.view.ManutencaoVeiculo;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,7 +22,7 @@ public class ManutencaoVeiculoPresenter {
     }
 
     public void getVeiculo(Veiculo veiculo) {
-        veiculoService = new RetrofitConfig().getVeiculoService();
+        veiculoService = new Services().getVeiculoService();
 
         Call<Veiculo> callVeiculo = veiculoService.pesquisaveiculo(veiculo);
         callVeiculo.enqueue(new Callback<Veiculo>() {
@@ -48,7 +48,7 @@ public class ManutencaoVeiculoPresenter {
     }
 
     public void excluirVeiculo(Veiculo veiculo) {
-        Call<Erro> callExcluir = new RetrofitConfig().getVeiculoService().excluiveiculo(veiculo);
+        Call<Erro> callExcluir = new Services().getVeiculoService().excluiveiculo(veiculo);
         callExcluir.enqueue(new Callback<Erro>() {
             @Override
             public void onResponse(Call<Erro> call, Response<Erro> response) {

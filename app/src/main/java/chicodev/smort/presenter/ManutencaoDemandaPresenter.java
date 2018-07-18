@@ -1,6 +1,6 @@
 package chicodev.smort.presenter;
 
-import chicodev.smort.core.RetrofitConfig;
+import chicodev.smort.core.Services;
 import chicodev.smort.model.Demanda;
 import chicodev.smort.model.Erro;
 import chicodev.smort.view.ManutencaoDemanda;
@@ -20,7 +20,7 @@ public class ManutencaoDemandaPresenter {
     }
 
     public void getDemanda(Demanda demanda){
-        Call<Demanda> callDemanda = new RetrofitConfig().getDemandaService().pesquisar(demanda);
+        Call<Demanda> callDemanda = new Services().getDemandaService().pesquisar(demanda);
         callDemanda.enqueue(new Callback<Demanda>() {
             @Override
             public void onResponse(Call<Demanda> call, Response<Demanda> response) {
@@ -42,7 +42,7 @@ public class ManutencaoDemandaPresenter {
     }
 
     public void excluirDemanda(Demanda demanda){
-        Call<Erro> excluir = new RetrofitConfig().getDemandaService().excluir(demanda);
+        Call<Erro> excluir = new Services().getDemandaService().excluir(demanda);
         excluir.enqueue(new Callback<Erro>() {
             @Override
             public void onResponse(Call<Erro> call, Response<Erro> response) {

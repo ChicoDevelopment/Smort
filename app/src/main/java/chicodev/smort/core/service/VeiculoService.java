@@ -1,4 +1,4 @@
-package chicodev.smort.service;
+package chicodev.smort.core.service;
 
 import chicodev.smort.model.Erro;
 import chicodev.smort.model.Veiculo;
@@ -6,9 +6,6 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
 
-/**
- * Created by txring on 30/04/2018.
- */
 public interface VeiculoService {
 
     @POST("veiculo/pesquisar")

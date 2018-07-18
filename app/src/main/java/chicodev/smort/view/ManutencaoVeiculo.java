@@ -3,26 +3,17 @@ package chicodev.smort.view;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.List;
-
 import chicodev.smort.R;
 import chicodev.smort.contract.ManutencaoVeiculoContract;
-import chicodev.smort.core.Gerenciador;
-import chicodev.smort.core.RetrofitConfig;
 import chicodev.smort.model.Erro;
-import chicodev.smort.model.Transportador;
 import chicodev.smort.model.Veiculo;
 import chicodev.smort.presenter.ManutencaoVeiculoPresenter;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class ManutencaoVeiculo extends AppCompatActivity implements ManutencaoVeiculoContract {
 

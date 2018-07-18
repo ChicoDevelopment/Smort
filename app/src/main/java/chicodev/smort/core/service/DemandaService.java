@@ -1,4 +1,4 @@
-package chicodev.smort.service;
+package chicodev.smort.core.service;
 
 import chicodev.smort.model.Demanda;
 import chicodev.smort.model.Erro;
@@ -6,9 +6,6 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
 
-/**
- * Created by txring on 22/06/2018.
- */
 public interface DemandaService {
 
     @POST("demanda/pesquisar")

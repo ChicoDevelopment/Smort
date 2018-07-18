@@ -1,6 +1,6 @@
 package chicodev.smort.presenter;
 
-import chicodev.smort.core.RetrofitConfig;
+import chicodev.smort.core.Services;
 import chicodev.smort.model.Demanda;
 import chicodev.smort.model.Erro;
 import chicodev.smort.view.CadastroDemanda;
@@ -20,7 +20,7 @@ public class CadastroDemandaPresenter {
     }
 
     public void cadastrarDemanda(Demanda demanda) {
-        Call<Erro> cadastrar = new RetrofitConfig().getDemandaService().cadastrar(demanda);
+        Call<Erro> cadastrar = new Services().getDemandaService().cadastrar(demanda);
         cadastrar.enqueue(new Callback<Erro>() {
             @Override
             public void onResponse(Call<Erro> call, Response<Erro> response) {
@@ -38,7 +38,7 @@ public class CadastroDemandaPresenter {
     }
 
     public void alterarDemanda(Demanda demanda){
-        Call<Erro> alterar = new RetrofitConfig().getDemandaService().alterar(demanda);
+        Call<Erro> alterar = new Services().getDemandaService().alterar(demanda);
         alterar.enqueue(new Callback<Erro>() {
             @Override
             public void onResponse(Call<Erro> call, Response<Erro> response) {

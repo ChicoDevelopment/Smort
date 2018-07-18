@@ -2,7 +2,7 @@ package chicodev.smort.presenter;
 
 import java.util.List;
 
-import chicodev.smort.core.RetrofitConfig;
+import chicodev.smort.core.Services;
 import chicodev.smort.model.Erro;
 import chicodev.smort.model.Marca;
 import chicodev.smort.model.TipoVeiculo;
@@ -25,7 +25,7 @@ public class CadastroVeiculoPresenter {
 
     public void cadastrarVeiculo(Veiculo veiculo) {
 
-        Call<Erro> callCadastro = new RetrofitConfig().getVeiculoService().insereveiculo(veiculo);
+        Call<Erro> callCadastro = new Services().getVeiculoService().insereveiculo(veiculo);
         callCadastro.enqueue(new Callback<Erro>() {
             @Override
             public void onResponse(Call<Erro> call, Response<Erro> response) {
@@ -49,7 +49,7 @@ public class CadastroVeiculoPresenter {
 
     public void alterarVeiculo(Veiculo veiculo){
 
-        Call<Erro> callAltera = new RetrofitConfig().getVeiculoService().alteraveiculo(veiculo);
+        Call<Erro> callAltera = new Services().getVeiculoService().alteraveiculo(veiculo);
         callAltera.enqueue(new Callback<Erro>() {
             @Override
             public void onResponse(Call<Erro> call, Response<Erro> response) {
@@ -70,7 +70,7 @@ public class CadastroVeiculoPresenter {
     }
 
     public void getListaMarca(){
-        Call<List<Marca>> callListaMarca = new RetrofitConfig().getMarcaService().getlista();
+        Call<List<Marca>> callListaMarca = new Services().getMarcaService().getlista();
         callListaMarca.enqueue(new Callback<List<Marca>>() {
             @Override
             public void onResponse(Call<List<Marca>> call, Response<List<Marca>> response) {
@@ -92,7 +92,7 @@ public class CadastroVeiculoPresenter {
     }
 
     public void getListaTipo(){
-        Call<List<TipoVeiculo>> callListaTipo = new RetrofitConfig().getTipoVeiculoService().getlista();
+        Call<List<TipoVeiculo>> callListaTipo = new Services().getTipoVeiculoService().getlista();
         callListaTipo.enqueue(new Callback<List<TipoVeiculo>>() {
             @Override
             public void onResponse(Call<List<TipoVeiculo>> call, Response<List<TipoVeiculo>> response) {
